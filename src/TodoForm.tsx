@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export const TodoForm: React.FC = () => {
+interface Props {
+  onSubmit(): any
+}
+
+export const TodoForm: React.FC<Props> = (props: Props) => {
+
+  const [todoText, setTodoText] = useState('')
+  const [todoStatus, setTodoStatus] = useState(false)
+
+  console.log(todoStatus, todoText)
+
+
   return (
-   <form>
-     <input type="text" placeholder="What do you need done?" />
-     <input type="checkbox" />
+   <form onSubmit={props.onSubmit}>
+     <input onChange={evt => setTodoText(evt.target.value)} type="text" placeholder="What do you need done?" />
+     <input onChange={evt => setTodoStatus(evt.target.checked)} type="checkbox" />
    </form>
   )
 }

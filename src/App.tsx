@@ -11,11 +11,15 @@ function App() {
 
   const renderTodos = () => todos.map(todo => <Todo todo={todo} />)
 
+  const onSubmit = () => {
+
+  }
+
   return (
     <div className="App">
       Todo app
       {renderTodos()}
-      <TodoForm />
+      <TodoForm onSubmit={onSubmit} />
     </div>
   );
 }
