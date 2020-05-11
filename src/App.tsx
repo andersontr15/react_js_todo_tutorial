@@ -2,17 +2,24 @@ import React, { useState } from 'react';
 import './App.css';
 import { Todo } from './Todo';
 import { TodoForm } from './TodoForm';
+import { ITodo } from './interfaces';
+
 
 function App() {
 
-  const [todos, setTodos ] = useState([])
+  const [todos, setTodos ] =  useState<ITodo[] | undefined>([])
 
-  console.log(setTodos)
+  const onRemoveTodo = (id: number) => setTodos(todos?.filter(t => t.id !== id))
 
-  const renderTodos = () => todos.map(todo => <Todo todo={todo} />)
+  console.log('here hit')
 
-  const onSubmit = () => {
+  const renderTodos = () => todos?.map((todo, idx) => <div>
+    <Todo key={idx} todo={todo} />
+    <div onClick={() => onRemoveTodo(todo.id)}>X</div>
+  </div>)
 
+  const onSubmit = (todo: ITodo) => {
+    setTodos(todos?.concat({ ...todo, created_at: new Date( ), id: todos.length ? todos.length + 1 : 1}))
   }
 
   return (

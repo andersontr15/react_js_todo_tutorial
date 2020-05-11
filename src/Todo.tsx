@@ -1,12 +1,8 @@
 import React from 'react'
+import { ITodo } from './interfaces'
 
 interface Props {
-  todo: {
-    isCompleted: boolean;
-    name: string;
-    created_at: Date;
-    updated_at?: Date | null
-  }
+  todo: ITodo
 }
 
 export const Todo: React.FC<Props> = (props: Props) => {
