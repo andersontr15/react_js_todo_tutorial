@@ -12,12 +12,23 @@ const saveArrayToLocalStorage = (key: string, arr: any[] | undefined) => {
 
 const retrieveFromLocalStorage = (key: string) => window.localStorage.getItem(key)
 
+const clearArrayFromLocalStorage = (key: string) => window.localStorage.setItem(key, JSON.stringify([]))
+
 
 function App() {
 
   const [todos, setTodos ] =  useState<ITodo[] | undefined>([])
 
   const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    if(!todos?.length) {
+      clearArrayFromLocalStorage('todos')
+    }
+    else {
+      saveArrayToLocalStorage('todos', todos || [])
+    }
+  }, [todos])
 
   useEffect(() => {
     if(!isLoading) {
@@ -27,7 +38,6 @@ function App() {
       }
       setIsLoading(true)
     }
-    return () => saveArrayToLocalStorage('todos', todos)
   }, [isLoading, todos])
 
   const onRemoveTodo = (id: number) => setTodos(todos?.filter(t => t.id !== id))
