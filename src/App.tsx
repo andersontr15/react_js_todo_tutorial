@@ -3,6 +3,7 @@ import './App.css';
 import { Todo } from './Todo';
 import { TodoForm } from './TodoForm';
 import { ITodo } from './interfaces';
+import cailou from './caillou.png'
 
 const saveArrayToLocalStorage = (key: string, arr: any[] | undefined) => {
   if(!arr?.length) return;
@@ -53,7 +54,10 @@ function App() {
 
   return (
     <div className="App">
-      Todo app
+      <h2>
+      Caillou's first todo application (Agile &#8482;)
+      </h2>
+      <img style={{ width: '300px'}} src={cailou} />
       {renderTodos()}
       <TodoForm onSubmit={onSubmit} />
     </div>

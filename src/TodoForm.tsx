@@ -11,7 +11,7 @@ export const TodoForm: React.FC<Props> = (props: Props) => {
   const [todoText, setTodoText] = useState(props?.todo?.name || '')
   const [todoStatus, setTodoStatus] = useState(props?.todo?.isCompleted || false)
 
-  console.log(todoText)
+  console.log(todoText.length)
 
   const clearFormData = () => {
     setTodoText('')
@@ -35,7 +35,7 @@ export const TodoForm: React.FC<Props> = (props: Props) => {
    <form action="" onSubmit={onSubmit}>
      <input value={todoText} onChange={evt => setTodoText(evt.target.value)} type="text" placeholder="What do you need done?" />
      <input checked={todoStatus} onChange={evt => setTodoStatus(evt.target.checked)} type="checkbox" />
-  <button type="submit">{props?.todo?.isEditing ? 'Update' : 'Create'}</button>
+    <button disabled={!todoText.trim().length} type="submit">{props?.todo?.isEditing ? 'Update' : 'Create'}</button>
    </form>
   )
 }
